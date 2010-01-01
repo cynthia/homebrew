@@ -9,14 +9,18 @@ class Pike <Formula
     # Any level of optimization provided by homebrew triggers a inline assembly error.
     # Temporary workaround to prevent this until a good solution comes up.
     #
-    # TODO: Figure out why safe C flags also trigger the same error.
+    # I still do not understand /why/ this works, and safe C flags do not.
+
+    hack_optimized_flags = ''   # TODO: Optimization flags that don't burn
 
     ENV['CC'] = ''
     ENV['CXX'] = ''
     ENV['LD'] = ''
 
-    ENV['CFLAGS'] = ''
-    ENV['CXXFLAGS'] = ''
+    ENV['CFLAGS'] =  hack_optimized_flags
+    ENV['CXXFLAGS'] = ENV['CFLAGS']
+    
+    ENV.deparallelize if MACOS_VERSION >= 10.6
         
     inreplace 'Makefile', '#CONFIGUREARGS=', "CONFIGUREARGS=--prefix=#{prefix}"
 
