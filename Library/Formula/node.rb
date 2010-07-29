@@ -1,21 +1,26 @@
 require 'formula'
 
 class Node <Formula
-  url 'http://s3.amazonaws.com/four.livejournal/20091219/node-v0.1.22.tar.gz'
+  url 'http://nodejs.org/dist/node-v0.1.102.tar.gz'
   head 'git://github.com/ry/node.git'
   homepage 'http://nodejs.org/'
-  md5 '0cfff2bf4811ab0d0cc5d4db1afe9e2b'
+  md5 '93279f1e4595558dacb45a78259b7739'
 
   aka 'node.js'
 
+  # Stripping breaks dynamic loading
   def skip_clean? path
-    # TODO: at some point someone should tweak this so it only skips clean
-    # for the bits that break the build otherwise
     true
   end
 
   def install
-    ENV.gcc_4_2
+    fails_with_llvm
+
+    inreplace 'wscript' do |s|
+      s.gsub! '/usr/local', HOMEBREW_PREFIX
+      s.gsub! '/opt/local/lib', '/usr/lib'
+    end
+
     system "./configure", "--prefix=#{prefix}"
     system "make install"
   end

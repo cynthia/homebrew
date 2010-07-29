@@ -1,26 +1,28 @@
 require 'formula'
 
 class Couchdb <Formula
-  @url='http://apache.abdaal.com/couchdb/0.10.1/apache-couchdb-0.10.1.tar.gz'
-  @homepage='http://couchdb.apache.org/'
-  @md5='a34dae8bf402299e378d7e8c13b7ba46'
+  url 'git://github.com/apache/couchdb.git'
+  homepage "http://couchdb.apache.org/"
+  version "1.0.0"
+  @specs = {:tag => "origin/tags/1.0.0"}
 
   depends_on 'spidermonkey'
   depends_on 'icu4c'
   depends_on 'erlang'
 
   def install
+    system "./bootstrap" if File.exists? "bootstrap"
     system "./configure", "--prefix=#{prefix}",
                           "--localstatedir=#{var}",
                           "--sysconfdir=#{etc}",
-                          "--with-erlang=#{HOMEBREW_PREFIX}/lib/erlang/usr/include"
+                          "--with-erlang=#{HOMEBREW_PREFIX}/lib/erlang/usr/include",
+                          "--with-js-include=#{HOMEBREW_PREFIX}/include",
+                          "--with-js-lib=#{HOMEBREW_PREFIX}/lib"
     system "make"
     system "make install"
 
-    couchjs = "#{prefix}/lib/couchdb/bin/couchjs"
-    system "chmod 755 #{couchjs}"
-
-    (var+'lib'+'couchdb').mkpath
-    (var+'log'+'couchdb').mkpath
+    (lib+'couchdb/bin/couchjs').chmod 0755
+    (var+'lib/couchdb').mkpath
+    (var+'log/couchdb').mkpath
   end
 end
