@@ -16,9 +16,11 @@ class Gtkx <Formula
   depends_on 'atk' => :optional
 
   def install
+    ENV.m32
     system "./configure", "--disable-debug", "--disable-dependency-tracking",
                           "--prefix=#{prefix}",
-                          "--disable-glibtest"
+                          "--disable-glibtest",
+			  "--without-tiff"
     system "make install"
   end
 end

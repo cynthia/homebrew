@@ -6,6 +6,7 @@ class Libtiff <Formula
   md5 '93e56e421679c591de7552db13384cb8'
 
   def install
+    ENV.m32
     system "./configure", "--prefix=#{prefix}", "--disable-debug", "--mandir=#{man}"
     system "make install"
   end

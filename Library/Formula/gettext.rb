@@ -14,6 +14,7 @@ class Gettext <Formula
   end
 
   def install
+    ENV.m32
     ENV.libxml2
     ENV.O3 # Issues with LLVM & O4 on Mac Pro 10.6
 

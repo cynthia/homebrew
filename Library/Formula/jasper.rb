@@ -8,6 +8,7 @@ class Jasper <Formula
   depends_on 'jpeg'
 
   def install
+    ENV.m32
     system "./configure", "--disable-debug",
                           "--disable-dependency-tracking",
                           "--enable-shared",

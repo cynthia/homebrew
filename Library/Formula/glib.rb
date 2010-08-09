@@ -20,10 +20,13 @@ class Glib <Formula
     # function, which breaks things for us, so we build our own
     # http://www.mail-archive.com/gtk-list@gnome.org/msg28747.html
     
+    ENV.m32
+    
     iconvd = Pathname.getwd+'iconv'
     iconvd.mkpath
 
     Libiconv.new.brew do
+      ENV.m32
       system "./configure", "--prefix=#{iconvd}", "--disable-debug", "--disable-dependency-tracking",
                             "--enable-static", "--disable-shared"
       system "make install"

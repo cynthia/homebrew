@@ -15,6 +15,7 @@ class Cairo <Formula
   end
 
   def install
+    ENV.m32
     system "./configure", "--disable-dependency-tracking",
                           "--prefix=#{prefix}",
                           "--with-x"

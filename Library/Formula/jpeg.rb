@@ -9,7 +9,7 @@ class Jpeg <Formula
   aka :libjpeg, :libjpg
 
   def install
-    ENV.universal_binary
+    ENV.m32
     system "./configure", "--prefix=#{prefix}", "--disable-dependency-tracking"
     system "make install"
   end

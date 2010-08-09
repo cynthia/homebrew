@@ -9,6 +9,7 @@ class Pixman <Formula
   depends_on 'libpng'
 
   def install
+    ENV.m32
     system "./configure", "--prefix=#{prefix}", "--disable-dependency-tracking"
     system "make install"
   end

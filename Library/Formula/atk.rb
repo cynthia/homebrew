@@ -9,6 +9,7 @@ class Atk <Formula
   depends_on 'glib'
   
   def install
+    ENV.m32
     system "./configure", "--disable-dependency-tracking",
                           "--prefix=#{prefix}",
                           "--disable-glibtest"
