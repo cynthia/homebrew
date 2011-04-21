@@ -1,9 +1,10 @@
 require 'formula'
 
-class Sqlite <Formula
-  url 'http://www.sqlite.org/sqlite-amalgamation-3.7.3.tar.gz'
-  md5 '74fe78b264f1c434c4b159d45b78e9b7'
-  homepage 'http://www.sqlite.org/'
+class Sqlite < Formula
+  homepage 'http://sqlite.org/'
+  url 'http://www.sqlite.org/sqlite-autoconf-3070601.tar.gz'
+  sha256 '79b7de2483cbbfa79721c9414d4c7acda00ba98a8b1fe73460fe57c173651ad4'
+  version '3.7.6.1'
 
   def options
   [
